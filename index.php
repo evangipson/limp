@@ -1,105 +1,10 @@
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Evan's Music Player</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        :root {
-            --currently-playing-height: 3.5rem;
-        }
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: arial, sans-serif;
-        }
-        body {
-            padding-top: var(--currently-playing-height); /* this lines up with the height of #currentlyPlaying */
-        }
-        .song {
-            display: inline-block;
-            text-align: center;
-            margin: 0 1rem 1rem 0;
-            padding: 3rem 2rem;
-            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        #currentlyPlaying {
-            height: var(--currently-playing-height); /* this lines up with the padding-top of body */
-            width: calc(100vw - 4rem);
-            background: lightgrey;
-            position: absolute;
-            top: 0;
-            left: 0;
-            padding: 0 2rem;
-        }
-        .song, nav li, #currentlyPlaying i, #progressBar {
-            cursor: pointer;
-        }
-        .song > * {
-            pointer-events: none;
-        }
-        /* Sidebar Navigation */
-        nav ul {
-            margin: 0;
-            padding: 0;
-        }
-        nav li {
-            list-style-type: none;
-            display: block;
-            width: calc(100% - 2rem);
-            border-bottom: 2px lightgrey solid;
-            padding: 1rem 1rem;
-        }
-        nav li:hover, nav li.active {
-            background: #ededed;
-        }
-        nav li:last-child() {
-            border-bottom: none;
-        }
-        #progressBar {
-            width: 100%;
-            height: 1.5rem;
-            margin: 1.25rem 0 0 1rem;
-        }
-        #songList {
-            text-align: center;
-        }
-        /* Desktop styles */
-        @media screen and (min-width:768px) {
-            nav, #songList {
-                overflow-y: scroll;
-                float: left;
-            }
-            nav {
-                width: 15rem;
-                height: calc(100vh - var(--currently-playing-height));
-                overflow-x: hidden;
-            }
-            #songList {
-                width: calc(100% - 15rem - 4rem);
-                height: calc(100vh - var(--currently-playing-height) - 2rem);
-                padding: 1rem 2rem;
-            }
-            #currentlyPlaying i {
-                position: relative;
-                top: 0.4rem;
-            }
-            #currentlyPlaying p {
-                position: relative;
-                top: -0.5rem;
-            }
-            #progressBar, .play-copy {
-                display: inline-block;
-            }
-            #progressBar {
-                position: relative;
-                width: 65%;
-                height: 1.5rem;
-                top: 0.63rem;
-            }
-            .play-copy {
-                width: 30%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="./style.css?00003" media="screen" />
   </head>
   <body>
     <?
@@ -158,5 +63,6 @@
     </audio>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./brain.js?00008"></script>
+    <div id="browserWarning"><p>Sorry!</p><p>Your browser isn't supported! Try using <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>, <a href="https://www.google.com/chrome/browser/desktop/index.html">Chrome</a>, <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Edge</a>, or <a href="https://www.apple.com/safari/">Safari</a>.</p></div>
   </body>
 </html>
