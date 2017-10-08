@@ -159,7 +159,7 @@ nav li {
 nav label {
     position: absolute;
     display: inline-block;
-    width: 5rem;
+    width: auto;
     top: 1rem;
     left: 1rem;
     cursor: pointer;
