@@ -144,6 +144,9 @@ nav li:hover, nav li.active {
 .song > * {
     pointer-events: none;
 }
+#progressBar {
+    display: none;
+}
 /* Sidebar Navigation */
 nav li:last-child() {
     border-bottom: none;
@@ -190,12 +193,6 @@ body {
     from { padding: 0; } 
     to { padding: 0; } 
 }
-#progressBar {
-    width: 100%;
-    display: block;
-    height: 1.5rem;
-    margin: 1.25rem 0 0 1rem;
-}
 /* Desktop styles */
 @media screen and (min-width:768px) {
     nav, #songList {
@@ -228,8 +225,10 @@ body {
     #progressBar {
         position: relative;
         width: 65%;
+        display: inline-block;
         height: 1.5rem;
         top: 0.63rem;
+        margin: 1.25rem 0 0 1rem;
     }
     .play-copy {
         width: 30%;
