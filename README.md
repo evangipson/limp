@@ -1,5 +1,5 @@
 # LiMP
-*LiMP* A Custom (Li)ghtweight (M)usic (P)layer, written in PHP and JavaScript.
+*LiMP* is a Custom (Li)ghtweight (M)usic (P)layer, written in PHP and JavaScript. It streams music from a server, and gives a nice interface for you to navigate and filter your music, all on a single page without any reloading!
 
 # Structure
 LiMP relies on a certain structure to generate the list of music:
