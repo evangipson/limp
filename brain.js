@@ -92,4 +92,8 @@ $(document).ready(function() {
             if (window.console && console.error("Error:" + err));
         }
     }, true);
+    // If mobile nav option is selected, close the mobile nav.
+    $("nav li").on("click", function() {
+        document.getElementById("menu").checked = false;
+    });
 });

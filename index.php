@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Evan's Music Player</title>
+    <title>Evan Gipson's Music | Powered by LiMP</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" type="text/css" href="./style.css?00003" media="screen" />
   </head>
@@ -30,7 +30,13 @@
                 if(is_file($fullPath)) {
                     $album = substr($path, strrpos($path, '/') + 1);
                     if(strpos($item, ".mp3") !== false || strpos($item, ".wav") !== false) {
-                        $songTiles[] = "<div class='song' data-song-path='".$localPath."' data-album='".$album."' data-song='".$songName."'><h3>$songName</h3><p>$album</p></div>";
+                        $songTiles[] = "<div class='song' data-song-path='".$localPath."' data-album='".$album."' data-song='".$songName."'>
+                            <h3>$songName</h3>
+                            <p>$album</p>
+                            <div class='song-play-button'>
+                                <i class='material-icons'>play_circle_outline</i>
+                            </div>
+                        </div>";
                     }
                 }
                 else if (is_dir($fullPath)) {
@@ -48,7 +54,11 @@
         shuffle($albumList);
         shuffle($songTiles);
     ?>
-    <nav id="albumList"><? echo "<ul>"; foreach($albumList as $albumTitle) {echo "<li data-album-filter='".$albumTitle."'>$albumTitle</li>";} echo "</ul>"; ?></nav>
+    <nav id="albumList">
+        <input type="checkbox" id="menu">
+        <label for="menu" class="mobile-menu-toggle"><i class="material-icons">menu</i></label>
+        <? echo "<ul>"; foreach($albumList as $albumTitle) {echo "<li data-album-filter='".$albumTitle."'>$albumTitle</li>";} echo "</ul>"; ?>
+    </nav>
     <section id="songList"><? foreach($songTiles as $tile) {echo $tile;} ?></section>
     <section id="currentlyPlaying">
         <p class="play-copy">
