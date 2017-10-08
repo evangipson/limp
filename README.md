@@ -6,8 +6,9 @@ LiMP relies on a certain structure to generate the list of music:
 ```
 LiMP
 │   index.php
-│   brain.js    
-│
+│   brain.js
+│   style.css
+|
 └───musicFolder1
 │   │   musicFile1.mp3
 │   │   musicFile2.mp3
