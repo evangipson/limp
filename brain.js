@@ -76,16 +76,17 @@ $(document).ready(function() {
             $(this).addClass("active");
             sortSongs(e.target.attributes["data-album-filter"].value);
         }
+        // If mobile nav option is selected, close the mobile nav.
+        document.getElementById("menu").checked = false;
+        // Always scroll the document to the top.
+        $(document).scrollTop(0);
+        // Also scroll the songlist to the top.
+        $("#songList").scrollTop(0);
     });
     // Clicking on songs play songs.
     $(".song").on("click",function(e) {
         startSong(e.target.attributes["data-song-path"].value, e.target.attributes["data-song"].value);
         $(this).addClass("active");
-    });
-    // If mobile nav option is selected, close the mobile nav.
-    $("nav li").on("click", function() {
-        document.getElementById("menu").checked = false;
-        $(document).scrollTop(0);
     });
     //set up event to update the progress bar
     document.getElementById("audioPlayer").addEventListener("timeupdate", progressBar, true);
