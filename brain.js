@@ -55,6 +55,15 @@ function progressBar() {
 }
 
 $(document).ready(function() {
+    // Apply album art if we have it
+    $(".song").each(function() {
+        if($(this).attr("data-album-art")) {
+            $(this).css("background-image", "url('http://evangipson.com/"+$(this).attr("data-album-art")+"')");
+            $(this).css("background-size", "cover");
+            // Highlight the text, too
+            $(this).children("h3, p").css("background-color", "#597AB3");
+        }
+    })
     // Clicking on the album list filters the songs.
     $("nav li").on("click",function(e) {
         sortSongs(e.target.attributes["data-album-filter"].value);

@@ -69,6 +69,7 @@ body {
 .song {
     background: linear-gradient(to bottom, var(--primary-color), var(--primary-color-light), var(--secondary-color-light));
 }
+/* Fallback Album Covers */
 .song:nth-child(2n) {
     background: linear-gradient(to top left, var(--secondary-color), var(--secondary-color-light));
 }
@@ -89,12 +90,23 @@ nav li:hover, nav li.active {
 }
 /* Custom Elements */
 .song {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: relative;
     text-align: center;
-    margin: 0 1rem 1rem 0;
-    padding: 3rem 2rem;
+    width: 15rem;
+    height: 12rem;
+    padding: 4rem 2rem;
+    margin: 0 0 2rem;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08);
+}
+.song p, .song h3 {
+    padding: 0.5rem;
+}
+.song p {
+    display: inline;
 }
 .song-play-button {
     opacity: 0;
@@ -111,7 +123,7 @@ nav li:hover, nav li.active {
     opacity: 1.0;
 }
 .song-play-button i {
-    line-height: 12rem;
+    line-height: 9rem;
     font-size: 3rem;
     font-weight: bold;
 }
@@ -135,6 +147,9 @@ nav li:hover, nav li.active {
     top: -0.5rem;
 }
 #songList {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
     padding: 1rem 2rem;
     text-align: center;
 }
@@ -211,6 +226,9 @@ body {
         display: block;
         margin: 0;
         padding: 0;
+    }
+    .song {
+        margin: 0 2rem 2rem 0;
     }
     #songList {
         width: calc(100% - var(--nav-width) - 4rem);

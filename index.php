@@ -14,10 +14,23 @@
         function dirToOptions($path = __DIR__, $level = 0) {
             global $albumList;
             global $songTiles;
+            $albumArtPicture = false;
+            $fullPath = "";
             $items = scandir($path);
+            // First try and find album art.
+            foreach($items as $item) {
+                $fullPath = $path . DIRECTORY_SEPARATOR . $item;
+                if(is_file($fullPath)) {
+                    // Handle album art
+                    if(strpos($item, ".jpg") !== false || strpos($item, ".jpeg") !== false || strpos($item, ".png") !== false || strpos($item, ".bmp") !== false) {
+                        $albumArtPicture = array_splice(explode("/", $fullPath), 5);
+                        $albumArtPicture = implode("/", $albumArtPicture);
+                    }
+                }
+            }
             // Take each item in our directory scan and handle it.
             foreach($items as $item) {
-                // Ignore items strating with a dot (= hidden or nav)
+                // Ignore items starting with a dot (= hidden or nav)
                 if (strpos($item, '.') === 0) {
                     continue;
                 }
@@ -30,14 +43,26 @@
                 // Handle what we find.
                 if(is_file($fullPath)) {
                     $album = substr($path, strrpos($path, '/') + 1);
+                    // Handle music files
                     if(strpos($item, ".mp3") !== false || strpos($item, ".wav") !== false) {
-                        $songTiles[] = "<div class='song' data-song-path='".$localPath."' data-album='".$album."' data-song='".$songName."'>
-                            <h3>$songName</h3>
-                            <p>$album</p>
-                            <div class='song-play-button'>
-                                <i class='material-icons'>play_circle_outline</i>
-                            </div>
-                        </div>";
+                        if($albumArtPicture !== false) {
+                            $songTiles[] = "<div class='song' data-album-art='".$albumArtPicture."' data-song-path='".$localPath."' data-album='".$album."' data-song='".$songName."'>
+                                <h3>$songName</h3>
+                                <p>$album</p>
+                                <div class='song-play-button'>
+                                    <i class='material-icons'>play_circle_outline</i>
+                                </div>
+                            </div>";
+                        }
+                        else {
+                            $songTiles[] = "<div class='song' data-song-path='".$localPath."' data-album='".$album."' data-song='".$songName."'>
+                                <h3>$songName</h3>
+                                <p>$album</p>
+                                <div class='song-play-button'>
+                                    <i class='material-icons'>play_circle_outline</i>
+                                </div>
+                            </div>";
+                        }
                     }
                 }
                 else if (is_dir($fullPath)) {
