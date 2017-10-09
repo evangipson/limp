@@ -66,14 +66,16 @@ $(document).ready(function() {
     })
     // Clicking on the album list filters the songs.
     $("nav li").on("click",function(e) {
-        sortSongs(e.target.attributes["data-album-filter"].value);
-        $("nav li").removeClass("active");
-        $(this).addClass("active");
-        // Add ability to clear filter
-        $(this).on("click",function(e) {
+        if($(this).hasClass("active")) {
             $(this).removeClass("active");
+            // Clear our filter
             $(".song").show();
-        });
+        }
+        else {
+            $("nav li").removeClass("active");
+            $(this).addClass("active");
+            sortSongs(e.target.attributes["data-album-filter"].value);
+        }
     });
     // Clicking on songs play songs.
     $(".song").on("click",function(e) {
