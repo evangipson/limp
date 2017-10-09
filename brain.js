@@ -61,7 +61,7 @@ $(document).ready(function() {
             $(this).css("background-image", "url('http://evangipson.com/"+$(this).attr("data-album-art")+"')");
             $(this).css("background-size", "cover");
             // Highlight the text, too
-            $(this).children("h3, p").css("background-color", "#597AB3");
+            $(this).children("h2, p").css("background-color", "#597AB3");
         }
     })
     // Clicking on the album list filters the songs.

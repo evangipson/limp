@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Evan Gipson's Music | Powered by LiMP</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" type="text/css" href="./style.css?00011" media="screen" />
+    <link rel="stylesheet" type="text/css" href="./style.css?00012" media="screen" />
   </head>
   <body>
     <?
@@ -40,29 +40,21 @@
                 $localPath = implode("/", $localPath);
                 // and a "friendly" song name
                 $songName = array_splice(explode(".", $item), 0)[0];
+                // Get timestamp from album
+                $stat = stat($fullPath);
                 // Handle what we find.
                 if(is_file($fullPath)) {
                     $album = substr($path, strrpos($path, '/') + 1);
                     // Handle music files
                     if(strpos($item, ".mp3") !== false || strpos($item, ".wav") !== false) {
-                        if($albumArtPicture !== false) {
-                            $songTiles[] = "<div class='song' data-album-art='".$albumArtPicture."' data-song-path='".$localPath."' data-album='".$album."' data-song='".$songName."'>
-                                <h3>$songName</h3>
-                                <p>$album</p>
-                                <div class='song-play-button'>
-                                    <i class='material-icons'>play_circle_outline</i>
-                                </div>
-                            </div>";
-                        }
-                        else {
-                            $songTiles[] = "<div class='song' data-song-path='".$localPath."' data-album='".$album."' data-song='".$songName."'>
-                                <h3>$songName</h3>
-                                <p>$album</p>
-                                <div class='song-play-button'>
-                                    <i class='material-icons'>play_circle_outline</i>
-                                </div>
-                            </div>";
-                        }
+                        $songTiles[] = "<div class='song' ".($albumArtPicture !== false ? "data-album-art='".$albumArtPicture."'" : "")." data-song-path='".$localPath."' data-album='".$album."' data-song='".$songName."'>
+                            <h2>$songName</h2>
+                            <p>$album</p>
+                            <p>".date("Y",$stat['mtime'])."</p>
+                            <div class='song-play-button'>
+                                <i class='material-icons'>play_circle_outline</i>
+                            </div>
+                        </div>";
                     }
                 }
                 else if (is_dir($fullPath)) {

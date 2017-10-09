@@ -102,7 +102,7 @@ nav li:hover, nav li.active {
     margin: 0 0 2rem;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
-.song p, .song h3 {
+.song p, .song h2 {
     padding: 0.5rem;
 }
 .song p {
