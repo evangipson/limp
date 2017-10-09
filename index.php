@@ -79,8 +79,9 @@
     </nav>
     <section id="songList"><? foreach($songTiles as $tile) {echo $tile;} ?></section>
     <section id="currentlyPlaying">
+        <i class="material-icons" id="playStatus">play_circle_outline</i>
         <p class="play-copy">
-            <i class="material-icons" id="playStatus">play_circle_outline</i> <b>Now Playing: </b><span id="currentSong"></span>
+            <b>Now Playing: </b><span id="currentSong"></span>
         </p>
         <canvas id="progressBar">
             canvas not supported

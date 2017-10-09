@@ -52,12 +52,14 @@ body {
 /* Colors */
 #currentlyPlaying, nav li, .song {
     color: var(--text-color);
+    text-shadow: 2px 4px var(--secondary-color-light);
     font-weight: bold;
 }
 .song p {
     font-style: italic;
     font-weight: 300;
     font-size: 0.8rem;
+    text-shadow: 1px 2px var(--secondary-color-light);
 }
 #songList {
     background: var(--tertiary-color);
@@ -80,12 +82,15 @@ body {
     background: linear-gradient(to bottom right, var(--primary-color), var(--primary-color-light));
 }
 nav li {
+    font-size: 18px;
     background: var(--primary-color);
+    text-shadow: 2px 4px var(--primary-color-light);
     transition: background ease-in-out var(--quick-anim-time),
                 color ease-in-out var(--quick-anim-time);
 }
 nav li:hover, nav li.active {
     background: var(--primary-color-light);
+    text-shadow: 2px 4px var(--primary-color);
     color: var(--secondary-color);
 }
 /* Custom Elements */
@@ -131,19 +136,21 @@ nav li:hover, nav li.active {
 }
 #currentlyPlaying {
     height: var(--currently-playing-height); /* this lines up with the margin-top of body */
-    width: calc(100vw - 4rem);
-    position: absolute;
+    width: calc(100% - 6rem);
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
     top: 0;
     left: 0;
-    padding: 0 4rem;
+    padding: 0 3rem;
 }
 #currentlyPlaying i {
-    position: relative;
-    top: 0.4rem;
+    font-size: 2rem;
 }
-#currentlyPlaying p {
-    position: relative;
-    top: -0.5rem;
+.play-copy {
+    margin-left: 0.5rem;
 }
 #songList {
     display: flex;
@@ -174,7 +181,7 @@ nav li {
     padding: 1rem 1rem;
 }
 nav label {
-    position: absolute;
+    position: fixed;
     display: inline-block;
     width: auto;
     top: 1rem;
@@ -231,18 +238,19 @@ body {
         height: calc(100vh - var(--currently-playing-height) - 4rem);
     }
     #currentlyPlaying {
-        padding: 0 2rem;
+        padding: 0 0.5rem;
+        width: calc(100% - 1rem);
+    }
+    #currentlyPlaying p, #currentlyPlaying i {
+        position: relative;
     }
     #progressBar, .play-copy {
         display: inline-block;
     }
     #progressBar {
-        position: relative;
-        width: 65%;
-        display: inline-block;
+        width: 70%;
         height: 1.5rem;
-        top: 0.63rem;
-        margin: 1.25rem 0 0 1rem;
+        margin: 1.25rem 1rem 0 1rem
     }
     .play-copy {
         width: 30%;

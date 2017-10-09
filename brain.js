@@ -82,6 +82,11 @@ $(document).ready(function() {
         startSong(e.target.attributes["data-song-path"].value, e.target.attributes["data-song"].value);
         $(this).addClass("active");
     });
+    // If mobile nav option is selected, close the mobile nav.
+    $("nav li").on("click", function() {
+        document.getElementById("menu").checked = false;
+        $(window).scrollTop(150);
+    });
     //set up event to update the progress bar
     document.getElementById("audioPlayer").addEventListener("timeupdate", progressBar, true);
     //set up mouse click to control position of audio
@@ -103,8 +108,4 @@ $(document).ready(function() {
             if (window.console && console.error("Error:" + err));
         }
     }, true);
-    // If mobile nav option is selected, close the mobile nav.
-    $("nav li").on("click", function() {
-        document.getElementById("menu").checked = false;
-    });
 });
