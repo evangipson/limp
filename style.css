@@ -25,6 +25,7 @@
     z-index: 2;
     background: #E2A9CE; /* This is --primary-color */
     color: #FDF4C2; /* This is --text-color */
+    text-shadow: 5px 5px #7591C2; /* This is --secondary-color-light */
     text-align: center;
     font-size: 3.5rem;
     font-weight: bold;
