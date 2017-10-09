@@ -8,6 +8,7 @@ LiMP
 │   index.php
 │   brain.js
 │   style.css
+|   directory-crawl.php
 |
 └───musicFolder1
 │   │   musicFile1.mp3
