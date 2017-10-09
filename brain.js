@@ -85,7 +85,7 @@ $(document).ready(function() {
     // If mobile nav option is selected, close the mobile nav.
     $("nav li").on("click", function() {
         document.getElementById("menu").checked = false;
-        $(window).scrollTop(150);
+        $(document).scrollTop(0);
     });
     //set up event to update the progress bar
     document.getElementById("audioPlayer").addEventListener("timeupdate", progressBar, true);
