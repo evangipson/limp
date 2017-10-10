@@ -34,6 +34,13 @@ function toggleSongPlay(url, songTitle) {
     }
 }
 
+// Get the next non-hidden song and play it!
+// TODO: Update query string with autoplay maybe?
+function playNextSong() {
+    var nextSong = $(".active").next(".song:not(':hidden')");;
+    $(nextSong).click();
+}
+
 function pauseSong() {
     var audioPlayer = document.getElementById("audioPlayer");
     var playButton = document.getElementById("playStatus");
@@ -121,18 +128,20 @@ $(document).ready(function() {
         // Handle either playing or pausing the song.
         toggleSongPlay(e.target.attributes["data-song-path"].value, e.target.attributes["data-song"].value);
     });
-    //set up event to update the progress bar
+    // set up event to update the progress bar
     document.getElementById("audioPlayer").addEventListener("timeupdate", progressBar, true);
-    //set up mouse click to control position of audio
+    // If someone lets a song play all the way, start the next one!
+    document.getElementById("audioPlayer").addEventListener("ended", playNextSong);
+    // set up mouse click to control position of audio
     document.getElementById("progressBar").addEventListener("click", function(e) {
-        //this might seem redundant, but this these are needed later - make global to remove these
+        // this might seem redundant, but this these are needed later - make global to remove these
         var oAudio = document.getElementById('audioPlayer'); 
         var canvas = this;
         canvas.width = canvas.offsetWidth;
 
         if (!e) {
             e = window.event;
-        } //get the latest windows event if it isn't set
+        } // get the latest windows event if it isn't set
         try {
             //calculate the current time based on position of mouse cursor in canvas box
             oAudio.currentTime = oAudio.duration * (e.offsetX / canvas.clientWidth);
