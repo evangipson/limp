@@ -60,5 +60,5 @@ function dirToOptions($path = __DIR__, $level = 0) {
 dirToOptions();
 // Randomize albums and songs before display.
 shuffle($albumList);
-//shuffle($songTiles);
+shuffle($songTiles);
 ?>
