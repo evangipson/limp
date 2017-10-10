@@ -42,7 +42,7 @@ function dirToOptions($path = __DIR__, $level = 0) {
                     <p>$album</p>
                     <p>".date("Y",$stat['mtime'])."</p>
                     <div class='song-play-button'>
-                        <i class='material-icons'>play_circle_outline</i>
+                        <i class='material-icons song-play-icon'>play_circle_outline</i>
                     </div>
                 </div>";
             }
@@ -60,5 +60,5 @@ function dirToOptions($path = __DIR__, $level = 0) {
 dirToOptions();
 // Randomize albums and songs before display.
 shuffle($albumList);
-shuffle($songTiles);
+//shuffle($songTiles);
 ?>

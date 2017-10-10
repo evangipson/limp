@@ -1,32 +1,58 @@
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
 function sortSongs(albumName) {
     $(".song").hide();
     $(".song[data-album='"+albumName+"']").show();
 }
 
-function startSong(url, songTitle) {
-    $(".song").removeClass("active");
+function toggleSongPlay(url, songTitle) {
+    var audioPlayer = document.getElementById("audioPlayer");
     var songUrl = "http://evangipson.com/" + url;
-    $("#currentSong").text(songTitle);
-    document.getElementById("audioPlayer").src = songUrl;
-    playSong();
+    if($("#currentSong").text() === songTitle) {
+        if (audioPlayer.duration > 0 && !audioPlayer.paused) {
+            $(".active .song-play-icon").text("play_circle_outline");
+            pauseSong();
+        }
+        else {
+            $(".active .song-play-icon").text("pause_circle_outline");
+            playSong();
+        }
+    }
+    else {
+        document.getElementById("audioPlayer").src = songUrl;
+        $("#currentSong").text(songTitle);
+        $(".active .song-play-icon").text("pause_circle_outline");
+        playSong();
+    }
 }
 
 function pauseSong() {
     var audioPlayer = document.getElementById("audioPlayer");
     var playButton = document.getElementById("playStatus");
     if (audioPlayer.duration > 0 && !audioPlayer.paused) {
-        audioPlayer.pause();
         playButton.innerText = "play_circle_outline";
+        audioPlayer.pause();
+        // Allow playing!
         $("#playStatus").on("click",function() {
             playSong();
         });
     }
 }
+
 function playSong() {
     var audioPlayer = document.getElementById("audioPlayer");
     var pauseButton = document.getElementById("playStatus");
-    audioPlayer.play();
     pauseButton.innerText = "pause_circle_outline";
+    audioPlayer.play();
+    // Allow pausing!
     $("#playStatus").on("click",function() {
         pauseSong();
     });
@@ -55,6 +81,10 @@ function progressBar() {
 }
 
 $(document).ready(function() {
+    // Autoplay if we have the query string
+    /*if(getParameterByName("ap") === true) {
+        playSong();
+    }*/
     // Apply album art if we have it
     $(".song").each(function() {
         if($(this).attr("data-album-art")) {
@@ -85,8 +115,11 @@ $(document).ready(function() {
     });
     // Clicking on songs play songs.
     $(".song").on("click",function(e) {
-        startSong(e.target.attributes["data-song-path"].value, e.target.attributes["data-song"].value);
+        // Clear active state besides on this one.
+        $(".song").removeClass("active");
         $(this).addClass("active");
+        // Handle either playing or pausing the song.
+        toggleSongPlay(e.target.attributes["data-song-path"].value, e.target.attributes["data-song"].value);
     });
     //set up event to update the progress bar
     document.getElementById("audioPlayer").addEventListener("timeupdate", progressBar, true);
