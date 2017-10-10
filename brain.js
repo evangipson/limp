@@ -37,8 +37,22 @@ function toggleSongPlay(url, songTitle) {
 // Get the next non-hidden song and play it!
 // TODO: Update query string with autoplay maybe?
 function playNextSong() {
-    var nextSong = $(".active").next(".song:not(':hidden')");;
-    $(nextSong).click();
+    var activeSong = $(".active.song");
+    // If we have an active song in the list, start the next song.
+    if(activeSong.is(":visible")) {
+        // If there is a song next, start that.
+        if(activeSong.next(".song:not(':hidden')").length) {
+            activeSong.next(".song:not(':hidden')").click();
+        }
+        // Otherwise, loop around to the first song.
+        else {
+            $("#songList").find(".song:not(':hidden')").first().click();
+        }
+    }
+    // Otherwise, the user has navigated away. Let's play a more relevant song.
+    else {
+        $("#songList").find(".song:not(':hidden')").first().click();
+    }
 }
 
 function pauseSong() {
