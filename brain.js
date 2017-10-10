@@ -37,10 +37,6 @@ function toggleSongPlay(url, songTitle) {
 // Get the next non-hidden song and play it!
 // TODO: Update query string with autoplay maybe?
 function playNextSong() {
-    /* If we have an active song in the list, start the next song.
-     * Otherwise, the user has navigated away. Let's play a more relevant song.
-     * (Or loop around to the first song). */
-    $(".active").nextAll('.song:visible').first().length ? $(".active").nextAll('.song:visible').first().click() : $("#songList").find(".song:not(':hidden')").first().click();
 }
 
 function pauseSong() {
@@ -131,9 +127,14 @@ $(document).ready(function() {
         toggleSongPlay(e.target.attributes["data-song-path"].value, e.target.attributes["data-song"].value);
     });
     // set up event to update the progress bar
-    document.getElementById("audioPlayer").addEventListener("timeupdate", progressBar, true);
+    $("#audioPlayer").on("timeupdate", progressBar);
     // If someone lets a song play all the way, start the next one!
-    document.getElementById("audioPlayer").addEventListener("ended", playNextSong);
+    $("#audioPlayer").on("ended", function() {
+        /* If we have an active song in the list, start the next song.
+        * Otherwise, the user has navigated away. Let's play a more relevant song.
+        * (Or loop around to the first song). */
+        $(".active").nextAll('.song:visible').first().length ? $(".active").nextAll('.song:visible').first().click() : $("#songList").find(".song:not(':hidden')").first().click();
+    });
     // set up mouse click to control position of audio
     document.getElementById("progressBar").addEventListener("click", function(e) {
         // this might seem redundant, but this these are needed later - make global to remove these
