@@ -1,3 +1,15 @@
+function b64EncodeUnicode(str) {
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode(parseInt(p1, 16))
+    }))
+}
+
+function b64DecodeUnicode(str) {
+    return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+    }).join(''))
+}
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -125,6 +137,9 @@ $(document).ready(function() {
         $(this).addClass("active");
         // Handle either playing or pausing the song.
         toggleSongPlay(e.target.attributes["data-song-path"].value, e.target.attributes["data-song"].value);
+        // Update hash without history
+        var songName = e.target.attributes["data-song"].value;
+        history.replaceState(null, null, document.location.pathname + '#' + b64EncodeUnicode(songName));
     });
     // set up event to update the progress bar
     $("#audioPlayer").on("timeupdate", progressBar);
@@ -155,4 +170,13 @@ $(document).ready(function() {
             if (window.console && console.error("Error:" + err));
         }
     }, true);
+    // Now check for a fragment in the hash and click that song if there is one.
+    var songHash = window.location.hash.substr(1);
+    if(songHash) {
+        var $matchedSong = $(".song[data-song='" + b64DecodeUnicode(songHash) + "']")
+        // Move that song to be first, so the user sees it.
+        $matchedSong.prependTo("#songList");
+        // Try to play the song!
+        $matchedSong.click();
+    }
 });

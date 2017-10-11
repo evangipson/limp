@@ -30,10 +30,11 @@ function dirToOptions($path = __DIR__, $level = 0) {
         $localPath = implode("/", $localPath);
         // and a "friendly" song name
         $songName = array_splice(explode(".", $item), 0)[0];
-        // Get timestamp from album
+        // Get timestamp from item
         $stat = stat($fullPath);
         // Handle what we find.
         if(is_file($fullPath)) {
+            // Find album (this is different for files and songs)
             $album = substr($path, strrpos($path, '/') + 1);
             // Handle music files
             if(strpos($item, ".mp3") !== false || strpos($item, ".wav") !== false) {
@@ -48,6 +49,7 @@ function dirToOptions($path = __DIR__, $level = 0) {
             }
         }
         else if (is_dir($fullPath)) {
+            // Find album (this is different for files and songs)
             $album = substr($fullPath, strrpos($fullPath, '/') + 1);
             if(in_array($album, $albumList) == false) {
                 $albumList[] = $album;
