@@ -138,7 +138,7 @@ $(document).ready(function() {
         // Handle either playing or pausing the song.
         toggleSongPlay(e.target.attributes["data-song-path"].value, e.target.attributes["data-song"].value);
         // Update hash without history
-        var songName = e.target.attributes["data-song"].value;
+        var songName = e.target.attributes["data-song-path"].value;
         history.replaceState(null, null, document.location.pathname + '#' + b64EncodeUnicode(songName));
     });
     // set up event to update the progress bar
@@ -173,10 +173,12 @@ $(document).ready(function() {
     // Now check for a fragment in the hash and click that song if there is one.
     var songHash = window.location.hash.substr(1);
     if(songHash) {
-        var $matchedSong = $(".song[data-song='" + b64DecodeUnicode(songHash) + "']")
-        // Move that song to be first, so the user sees it.
-        $matchedSong.prependTo("#songList");
+        var $matchedSong = $(".song[data-song-path='" + b64DecodeUnicode(songHash) + "']");
+        // Automatically filter that album.
+        $("nav li[data-album-filter='" + $matchedSong.attr("data-album") + "']").click();
         // Try to play the song!
         $matchedSong.click();
+        // Move that song to be first, so the user sees it.
+        $matchedSong.prependTo("#songList");
     }
 });
