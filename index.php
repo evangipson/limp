@@ -28,7 +28,7 @@
         Your browser does not support the audio format.
     </audio>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="./brain.js?00019"></script>
+    <script src="./brain.js?00020"></script>
     <div id="browserWarning">
         <p>Sorry!</p>
         <p>Your browser isn't supported! Try using <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>, <a href="https://www.google.com/chrome/browser/desktop/index.html">Chrome</a>, <a href="https://www.microsoft.com/en-us/windows/microsoft-edge">Edge</a>, or <a href="https://www.apple.com/safari/">Safari</a>.</p>

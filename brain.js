@@ -133,7 +133,8 @@ $(document).ready(function() {
         /* If we have an active song in the list, start the next song.
         * Otherwise, the user has navigated away. Let's play a more relevant song.
         * (Or loop around to the first song). */
-        $(".active").nextAll('.song:visible').first().length ? $(".active").nextAll('.song:visible').first().click() : $("#songList").find(".song:not(':hidden')").first().click();
+        $nextVisibleSong = $(".active").nextAll('.song:visible').first();
+        $nextVisibleSong.length ? $nextVisibleSong.click() : $("#songList").find(".song:visible").first().click();
     });
     // set up mouse click to control position of audio
     document.getElementById("progressBar").addEventListener("click", function(e) {
