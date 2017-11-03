@@ -87,11 +87,11 @@ function progressBar() {
         var ctx = canvas.getContext("2d");
         //clear canvas before painting
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-        ctx.fillStyle = "rgba(0, 0, 0, 1.0)";
+        ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
         var fWidth = (elapsedTime / oAudio.duration) * (canvas.clientWidth);
         if (fWidth > 0) {
             ctx.fillRect(0, 0, fWidth, canvas.clientHeight/2);
-            ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+            ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
             ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight/2);
         }
     }

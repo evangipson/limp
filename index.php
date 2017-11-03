@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Evan Gipson's Music | Powered by LiMP</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" type="text/css" href="./style.css?00021" media="screen" />
+    <link rel="stylesheet" type="text/css" href="./style.css?00022" media="screen" />
   </head>
   <body>
     <?php include "./directory-crawl.php"; ?>
-    <nav id="albumList">
-        <input type="checkbox" id="menu">
-        <label for="menu" class="mobile-menu-toggle"><i class="material-icons">menu</i></label>
-        <? echo "<ul>"; foreach($albumList as $albumTitle) {echo "<li data-album-filter='".$albumTitle."'>$albumTitle</li>";} echo "</ul>"; ?>
-    </nav>
-    <section id="songList"><? foreach($songTiles as $tile) {echo $tile;} ?></section>
+    <section class="header">
+        <div>
+            <h1>Evan's Music Player</h1>
+        </div>  
+        <div>
+            <p>Click any track to start playing.</p>
+            <p>Sort by albums on the left.</p>
+            <p>Share by copy and pasting the URL.</p>
+        </div>
+    </section>
     <section id="currentlyPlaying">
         <i class="material-icons" id="playStatus">play_circle_outline</i>
         <p class="play-copy">
@@ -23,6 +27,16 @@
         <canvas id="progressBar">
             canvas not supported
         </canvas>
+    </section>
+    <nav id="albumList">
+        <input type="checkbox" id="menu">
+        <label for="menu" class="mobile-menu-toggle"><i class="material-icons">menu</i></label>
+        <? echo "<ul>"; foreach($albumList as $albumTitle) {echo "<li data-album-filter='".$albumTitle."'>$albumTitle</li>";} echo "</ul>"; ?>
+    </nav>
+    <section id="songList"><? foreach($songTiles as $tile) {echo $tile;} ?></section>
+    <section class="footer">
+        <p><a href="https://github.com/evangipson/limp">Powered by LiMP</a></p>
+        <p><a href="http://evangipson.com/">Back to Evan's Homepage</a></p>
     </section>
     <audio id="audioPlayer" src="">
         Your browser does not support the audio format.

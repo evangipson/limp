@@ -2,8 +2,8 @@
  * Note this isn't supported in IE10-IE11, or Opera Mini:
  * http://caniuse.com/#feat=css-variables */
 :root {
-    --currently-playing-height: 3.5rem;
-    --nav-width: 15rem;
+    --currently-playing-height: 5rem;
+    --nav-width: 20rem;
     --quick-anim-time: 0.1s;
     --primary-color: #E2A9CE;
     --primary-color-light: #E6C7D6;
@@ -46,9 +46,6 @@ body, html {
     padding: 0;
     font-family: arial, sans-serif;
     z-index: 1;
-}
-body {
-    margin-top: var(--currently-playing-height); /* this lines up with the height of #currentlyPlaying */
 }
 /* Colors */
 #currentlyPlaying, nav li, .song {
@@ -131,23 +128,55 @@ nav li:hover, nav li.active {
     opacity: 1.0;
 }
 .song-play-button i {
-    font-size: 6rem;
+    font-size: 10rem;
     font-weight: bold;
 }
+#playStatus {
+    font-size: 2rem;
+}
+.header {
+    background: var(--secondary-color-dark);
+    color: var(--text-color);
+    flex-direction: column;
+}
+.header div:first-child {
+    position:relative;
+    background-size: cover;
+    color: var(--text-color);
+    text-shadow: 2px 4px var(--primary-color);
+}
+.footer {
+    background: var(--secondary-color);
+    flex-direction: column;
+}
+.header, .footer {
+    display: flex;
+    /* width: calc(100vw - 3rem); */
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 1rem;
+    text-shadow: 2px 4px var(--secondary-color-light);
+}
+.footer a, .footer a:visited {
+    color: var(--tertiary-color);
+}
 #currentlyPlaying {
-    height: var(--currently-playing-height); /* this lines up with the margin-top of body */
+    height: calc(var(--currently-playing-height) * 0.75);
     width: calc(100% - 6rem);
     position: fixed;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    top: 0;
+    bottom: 0;
     left: 0;
     padding: 0 3rem;
+    z-index: 4;
+    font-size: 1.3rem;
 }
-#currentlyPlaying i {
-    font-size: 2rem;
+nav label i.material-icons, #currentlyPlaying i {
+    font-size: 2.5rem;
 }
 .play-copy {
     margin-left: 0.5rem;
@@ -184,12 +213,12 @@ nav label {
     position: fixed;
     display: inline-block;
     width: auto;
-    top: 1rem;
-    left: 1rem;
+    bottom: 0.5rem;
+    left: 0.5rem;
     cursor: pointer;
     color: var(--text-color);
     user-select: none;
-    z-index: 2;
+    z-index: 4;
 }
 /* Get the checkbox out of the way */
 nav input[type="checkbox"] {
@@ -233,21 +262,33 @@ body {
         margin: 0;
         padding: 0;
     }
+    .header {
+        flex-direction: row;
+        justify-content: space-around;
+    }
     /* Font Sizes */
     h2 {
         font-size: 1.5rem;
     }
     body, ul li {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 28px;
+        line-height: 34px;
+    }
+    #currentlyPlaying i {
+        font-size: 4rem;
     }
     #songList {
         width: calc(100% - var(--nav-width) - 4rem);
         /* height: calc(100vh - var(--currently-playing-height) - 4rem); */
     }
     #currentlyPlaying {
+        height: var(--currently-playing-height);
         padding: 0 0.5rem;
         width: calc(100% - 1rem);
+        position: relative;
+        font-size: 2rem;
+        top: 0;
+        left: 0;
     }
     #currentlyPlaying p, #currentlyPlaying i {
         position: relative;
@@ -256,11 +297,11 @@ body {
         display: inline-block;
     }
     #progressBar {
-        width: 70%;
-        height: 1.5rem;
-        margin: 1.25rem 1rem 0 1rem
+        width: 50%;
+        height: 4.5rem;
+        margin: 3.25rem 0 0 0;
     }
     .play-copy {
-        width: 30%;
+        width: 40%;
     }
 }
