@@ -83,7 +83,6 @@ body {
     background: linear-gradient(to bottom right, var(--primary-color), var(--primary-color-light));
 }
 nav li {
-    font-size: 18px;
     background: var(--primary-color);
     text-shadow: 2px 4px var(--primary-color-light);
     transition: background ease-in-out var(--quick-anim-time),
@@ -233,6 +232,14 @@ body {
         display: block;
         margin: 0;
         padding: 0;
+    }
+    /* Font Sizes */
+    h2 {
+        font-size: 1.5rem;
+    }
+    body, ul li {
+        font-size: 24px;
+        line-height: 28px;
     }
     #songList {
         width: calc(100% - var(--nav-width) - 4rem);
