@@ -30,7 +30,14 @@
     <nav id="albumList">
         <input type="checkbox" id="menu">
         <label for="menu" class="mobile-menu-toggle"><i class="material-icons">menu</i></label>
-        <? echo "<ul>"; foreach($albumList as $albumTitle) {echo "<li data-album-filter='".$albumTitle."'>$albumTitle</li>";} echo "</ul>"; ?>
+        <?
+            echo "<ul>";
+            foreach($albumList as $albumTitle) {
+                $friendlyAlbumName = hashFriendlyName($albumTitle);
+                echo "<li data-album-filter='".$friendlyAlbumName."'>$albumTitle</li>";
+            }
+            echo "</ul>";
+        ?>
     </nav>
     <section id="songList"><? foreach($songTiles as $tile) {echo $tile;} ?></section>
     <section class="footer">

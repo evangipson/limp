@@ -1,6 +1,17 @@
 <? 
 $albumList =  array();
 $songTiles = array();
+function hashFriendlyName($songName) {
+    // Lower case everything
+    $songName = strtolower($songName);
+    // Make colons dashes so that URL hashes on ":" work
+    $songName = preg_replace("/[:]/", "-", $songName);
+    // Convert whitespaces and underscore to dash
+    $songName = preg_replace("/[\s_]/", "-", $songName);
+    // Clean up multiple dashes or whitespaces
+    $songName = preg_replace("/[\s-]+/", "-", $songName);
+    return $songName;
+}
 function dirToOptions($path = __DIR__, $level = 0) {
     global $albumList;
     global $songTiles;
@@ -38,7 +49,9 @@ function dirToOptions($path = __DIR__, $level = 0) {
             $album = substr($path, strrpos($path, '/') + 1);
             // Handle music files
             if(strpos($item, ".mp3") !== false || strpos($item, ".wav") !== false) {
-                $songTiles[] = "<div class='song' ".($albumArtPicture !== false ? "data-album-art='".$albumArtPicture."'" : "")." data-song-path='".$localPath."' data-album='".$album."' data-song='".$songName."'>
+                $friendlyAlbumName = hashFriendlyName($album);
+                $friendlySongName = hashFriendlyName($songName);
+                $songTiles[] = "<div class='song' ".($albumArtPicture !== false ? "data-album-art='".$albumArtPicture."'" : "")." data-song-path='".$localPath."' data-album='".$friendlyAlbumName."' data-song='".$friendlySongName."'>
                     <h2>$songName</h2>
                     <p>$album</p>
                     <p>".date("Y",$stat['mtime'])."</p>
