@@ -1,15 +1,3 @@
-function b64EncodeUnicode(str) {
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-        return String.fromCharCode(parseInt(p1, 16))
-    }))
-}
-
-function b64DecodeUnicode(str) {
-    return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-    }).join(''))
-}
-
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -138,8 +126,9 @@ $(document).ready(function() {
         // Handle either playing or pausing the song.
         toggleSongPlay(e.target.attributes["data-song-path"].value, e.target.attributes["data-song"].value);
         // Update hash without history
-        var songName = e.target.attributes["data-song-path"].value;
-        history.replaceState(null, null, document.location.pathname + '#' + b64EncodeUnicode(songName));
+        var songName = e.target.attributes["data-song"].value;
+        var songAlbum = e.target.attributes["data-album"].value;
+        history.replaceState(null, null, document.location.pathname + '#' + songName + ":" + songAlbum);
     });
     // set up event to update the progress bar
     $("#audioPlayer").on("timeupdate", progressBar);
@@ -173,9 +162,12 @@ $(document).ready(function() {
     // Now check for a fragment in the hash and click that song if there is one.
     var songHash = window.location.hash.substr(1);
     if(songHash) {
-        var $matchedSong = $(".song[data-song-path='" + b64DecodeUnicode(songHash) + "']");
+        var songAndAlbum = songHash.split(":");
+        var songName = songAndAlbum[0];
+        var albumName = songAndAlbum[1];
+        var $matchedSong = $(".song[data-song='" + songName + "'][data-album='" + albumName + "']");
         // Automatically filter that album.
-        $("nav li[data-album-filter='" + $matchedSong.attr("data-album") + "']").click();
+        $("nav li[data-album-filter='" + albumName + "']").click();
         // Try to play the song!
         $matchedSong.click();
         // Move that song to be first, so the user sees it.

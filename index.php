@@ -14,7 +14,6 @@
             <h1>Evan's Music Player</h1>
         </div>  
         <div>
-            <p>Click any track to start playing.</p>
             <p>Sort by albums on the left.</p>
             <p>Share by copy and pasting the URL.</p>
         </div>
