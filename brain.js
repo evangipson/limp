@@ -85,7 +85,7 @@ function progressBar() {
     }
 }
 
-$(document).ready(function() {
+$(window).on('load', function() {
     // Autoplay if we have the query string
     /*if(getParameterByName("ap") === true) {
         playSong();
@@ -124,7 +124,9 @@ $(document).ready(function() {
         $(".song").removeClass("active");
         $(this).addClass("active");
         // Handle either playing or pausing the song.
-        toggleSongPlay(e.target.attributes["data-song-path"].value, e.target.attributes["data-song"].value);
+        // NOTE: I really don't like passing in title this way, but it has to do for now since
+        // the PHP handles all the regex.
+        toggleSongPlay(e.target.attributes["data-song-path"].value, e.target.children[0].innerText);
         // Update hash without history
         var songName = e.target.attributes["data-song"].value;
         var songAlbum = e.target.attributes["data-album"].value;

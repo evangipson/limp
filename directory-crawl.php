@@ -1,11 +1,13 @@
 <? 
-$albumList =  array();
+$albumList = array();
 $songTiles = array();
 function hashFriendlyName($songName) {
     // Lower case everything
     $songName = strtolower($songName);
     // Make colons dashes so that URL hashes on ":" work
     $songName = preg_replace("/[:]/", "-", $songName);
+    // Make commas dashes so that URL hashes on "," work
+    $songName = preg_replace("/[,]/", "-", $songName);
     // Convert whitespaces and underscore to dash
     $songName = preg_replace("/[\s_]/", "-", $songName);
     // Clean up multiple dashes or whitespaces
@@ -73,7 +75,10 @@ function dirToOptions($path = __DIR__, $level = 0) {
     }
 }
 dirToOptions();
-// Randomize albums and songs before display.
-shuffle($albumList);
+// Sort albums by last modified
+usort($albumList, function($a, $b) {
+    return filemtime($a) < filemtime($b);
+});
+// Randomize songs before display.
 shuffle($songTiles);
 ?>
