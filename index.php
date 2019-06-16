@@ -11,7 +11,7 @@
     <?php include "./directory-crawl.php"; ?>
     <section class="header">
         <div>
-            <h1>Evan's Music Player</h1>
+            <h1><a href="https://evangipson.com/">Evan's</a> Music Player</h1>
         </div>
         <div>
             <p>Sort by albums on the left; share by copy and pasting the URL.</p>
@@ -41,7 +41,7 @@
     <section id="songList"><div class="large-bg"></div><? foreach($songTiles as $tile) {echo $tile;} ?></section>
     <section class="footer">
         <p><a href="https://github.com/evangipson/limp">Powered by LiMP</a></p>
-        <p><a href="http://evangipson.com/">Back to Evan's Homepage</a></p>
+        <p><a href="https://evangipson.com/">Back to Evan's Homepage</a></p>
     </section>
     <audio id="audioPlayer" src="">
         Your browser does not support the audio format.
