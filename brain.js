@@ -10,7 +10,9 @@ function getParameterByName(name, url) {
 
 function sortSongs(albumName) {
     $(".song").hide();
+    $(".song").removeClass("visible");
     $(".song[data-album='"+albumName+"']").show();
+    $(".song[data-album='"+albumName+"']").addClass("visible");
 }
 
 function toggleSongPlay(url, songTitle) {
@@ -96,7 +98,7 @@ $(window).on('load', function() {
             $(this).css("background-image", "url('http://evangipson.com/"+$(this).attr("data-album-art")+"')");
             $(this).css("background-size", "cover");
             // Highlight the text, too
-            $(this).children("h2, p").css("background-color", "#597AB3");
+            $(this).children("h2, p").css("background-color", "#202020");
         }
     })
     // Clicking on the album list filters the songs.
@@ -117,6 +119,8 @@ $(window).on('load', function() {
         $(document).scrollTop(0);
         // Also scroll the songlist to the top.
         $("#songList").scrollTop(0);
+        // Set the background to the album image
+        $(".large-bg").css("background-image", "url('http://evangipson.com/"+$(".song.visible").attr("data-album-art")+"')");
     });
     // Clicking on songs play songs.
     $(".song").on("click",function(e) {
@@ -168,14 +172,15 @@ $(window).on('load', function() {
         var songName = songAndAlbum[0];
         var albumName = songAndAlbum[1];
         var $matchedSong = $(".song[data-song='" + songName + "'][data-album='" + albumName + "']");
-        // Automatically filter that album.
-        $("nav li[data-album-filter='" + albumName + "']").click();
         // Try to play the song!
         $matchedSong.click();
+        // Automatically filter that album.
+        $("#albumList li[data-album-filter='" + albumName + "']").click();
         // Move that song to be first, so the user sees it.
         $matchedSong.prependTo("#songList");
     }
-    // Now pre-select the latest album to make sure to not show the listener everything at once.
-    var albumList = document.getElementById("albumList").getElementsByTagName("ul")[0];
-    albumList.getElementsByTagName("li")[0].click();
+    else {
+        // Pre-select the latest album to make sure to not show the listener everything at once.
+        $("#albumList ul li").first().click();
+    }
 });

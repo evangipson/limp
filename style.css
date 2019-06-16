@@ -5,12 +5,12 @@
     --currently-playing-height: 5rem;
     --nav-width: 20rem;
     --quick-anim-time: 0.1s;
-    --primary-color: #E2A9CE;
-    --primary-color-light: #E6C7D6;
-    --primary-color-extra-light: #EEE1DF;
-    --secondary-color: #597AB3;
-    --secondary-color-light: #7591C2;
-    --secondary-color-dark: #4B699E;
+    --primary-color: #191A1A;
+    --primary-color-light: rgb(54, 56, 56);
+    --primary-color-extra-light: rgb(85, 88, 88);
+    --secondary-color: #202020;
+    --secondary-color-light: #333333;
+    --secondary-color-dark: #0a0a0a;
     --text-color: #FDF4C2;
     --tertiary-color: #E5E7E1;
 }
@@ -23,9 +23,9 @@
     top: 0;
     left: 0;
     z-index: 2;
-    background: #E2A9CE; /* This is --primary-color */
+    background: #191A1A; /* This is --primary-color */
     color: #FDF4C2; /* This is --text-color */
-    text-shadow: 5px 5px #7591C2; /* This is --secondary-color-light */
+    text-shadow: 1px 2px #202020; /* This is --secondary-color-light */
     text-align: center;
     font-size: 3.5rem;
     font-weight: bold;
@@ -46,11 +46,12 @@ body, html {
     padding: 0;
     font-family: arial, sans-serif;
     z-index: 1;
+    overflow-x: hidden;
 }
 /* Colors */
 #currentlyPlaying, nav li, .song {
     color: var(--text-color);
-    text-shadow: 2px 4px var(--secondary-color-light);
+    text-shadow: 1px 2px var(--secondary-color-light);
     font-weight: bold;
 }
 .song p {
@@ -58,9 +59,6 @@ body, html {
     font-weight: 300;
     font-size: 0.8rem;
     text-shadow: 1px 2px var(--secondary-color-light);
-}
-#songList, body {
-    background: var(--tertiary-color);
 }
 #currentlyPlaying {
     background: var(--secondary-color);
@@ -81,13 +79,13 @@ body, html {
 }
 nav li {
     background: var(--primary-color);
-    text-shadow: 2px 4px var(--primary-color-light);
+    text-shadow: 1px 2px var(--primary-color-light);
     transition: background ease-in-out var(--quick-anim-time),
                 color ease-in-out var(--quick-anim-time);
 }
 nav li:hover, nav li.active {
     background: var(--primary-color-light);
-    text-shadow: 2px 4px var(--primary-color);
+    text-shadow: 1px 2px var(--primary-color);
     color: var(--secondary-color);
 }
 /* Custom Elements */
@@ -102,7 +100,7 @@ nav li:hover, nav li.active {
     height: 12rem;
     padding: 4rem 2rem;
     margin: 0 0 2rem;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.29);
 }
 .song p, .song h2 {
     padding: 0.5rem;
@@ -132,7 +130,7 @@ nav li:hover, nav li.active {
     font-weight: bold;
 }
 #playStatus {
-    font-size: 2rem;
+    font-size: 1.25rem;
 }
 .header {
     background: var(--secondary-color-dark);
@@ -143,7 +141,7 @@ nav li:hover, nav li.active {
     position:relative;
     background-size: cover;
     color: var(--text-color);
-    text-shadow: 2px 4px var(--primary-color);
+    text-shadow: 1px 2px var(--primary-color);
 }
 .footer {
     background: var(--secondary-color);
@@ -156,7 +154,7 @@ nav li:hover, nav li.active {
     align-items: center;
     text-align: center;
     padding: 1rem 1rem;
-    text-shadow: 2px 4px var(--secondary-color-light);
+    text-shadow: 1px 2px var(--secondary-color-light);
 }
 .footer a, .footer a:visited {
     color: var(--tertiary-color);
@@ -173,7 +171,7 @@ nav li:hover, nav li.active {
     left: 0;
     padding: 0 3rem;
     z-index: 4;
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 nav label i.material-icons, #currentlyPlaying i {
     font-size: 2.5rem;
@@ -187,6 +185,20 @@ nav label i.material-icons, #currentlyPlaying i {
     flex-wrap: wrap;
     padding: 2rem 2rem;
     text-align: center;
+    position: relative;
+}
+/* transparent cool album background */
+.large-bg {
+    filter: blur(4px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    z-index: -1;
+    background-size: contain;
+    transform: scale(1.1);
 }
 .song, nav li, #currentlyPlaying i, #progressBar {
     cursor: pointer;
@@ -195,7 +207,10 @@ nav label i.material-icons, #currentlyPlaying i {
     pointer-events: none;
 }
 #progressBar {
-    display: none;
+    height: 1.5rem;
+    margin-top: 1rem;
+    display: inline-block;
+    width: 40%;
 }
 /* Sidebar Navigation */
 nav li:last-child() {
@@ -274,7 +289,7 @@ body {
         font-size: 1.5rem;
     }
     body, ul li {
-        font-size: 28px;
+        font-size: 22px;
         line-height: 34px;
     }
     #currentlyPlaying i {
@@ -289,20 +304,15 @@ body {
         padding: 0 0.5rem;
         width: calc(100% - 1rem);
         position: relative;
-        font-size: 2rem;
+        font-size: 1.25rem;
         top: 0;
         left: 0;
     }
     #currentlyPlaying p, #currentlyPlaying i {
         position: relative;
     }
-    #progressBar, .play-copy {
+    .play-copy {
         display: inline-block;
-    }
-    #progressBar {
-        width: 50%;
-        height: 4.5rem;
-        margin: 3.25rem 0 0 0;
     }
     .play-copy {
         width: 40%;
