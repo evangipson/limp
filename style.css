@@ -186,10 +186,11 @@ nav label i.material-icons, #currentlyPlaying i {
     padding: 2rem 2rem;
     text-align: center;
     position: relative;
+    overflow: hidden; /* don't let blurry bg drive page size to be huge because we are scaling 110% */
 }
 /* transparent cool album background */
 .large-bg {
-    filter: blur(4px);
+    filter: blur(7px);
     position: absolute;
     left: 0;
     top: 0;
@@ -316,5 +317,8 @@ body {
     }
     .play-copy {
         width: 40%;
+    }
+    .large-bg {
+        background-size: cover;
     }
 }
