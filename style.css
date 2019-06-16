@@ -86,7 +86,7 @@ nav li {
 nav li:hover, nav li.active {
     background: var(--primary-color-light);
     text-shadow: 1px 2px var(--primary-color);
-    color: var(--secondary-color);
+    color: var(--primary-color-dark);
 }
 /* Custom Elements */
 .song {
