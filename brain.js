@@ -75,12 +75,12 @@ function progressBar() {
         var ctx = canvas.getContext("2d");
         //clear canvas before painting
         ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-        ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
         var fWidth = (elapsedTime / oAudio.duration) * (canvas.clientWidth);
         if (fWidth > 0) {
-            ctx.fillRect(0, 0, fWidth, canvas.clientHeight/2);
+            ctx.fillRect(0, 0, fWidth, canvas.clientHeight);
             ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-            ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight/2);
+            ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
         }
     }
 }
@@ -175,4 +175,7 @@ $(window).on('load', function() {
         // Move that song to be first, so the user sees it.
         $matchedSong.prependTo("#songList");
     }
+    // Now pre-select the latest album to make sure to not show the listener everything at once.
+    var albumList = document.getElementById("albumList").getElementsByTagName("ul")[0];
+    albumList.getElementsByTagName("li")[0].click();
 });

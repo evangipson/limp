@@ -80,5 +80,5 @@ usort($albumList, function($a, $b) {
     return filemtime($a) < filemtime($b);
 });
 // Randomize songs before display.
-shuffle($songTiles);
+// shuffle($songTiles);
 ?>
