@@ -17,7 +17,7 @@ function sortSongs(albumName) {
 
 function toggleSongPlay(url, songTitle) {
     var audioPlayer = document.getElementById("audioPlayer");
-    var songUrl = "http://evangipson.com/" + url;
+    var songUrl = "https://evangipson.com/" + url;
     if($("#currentSong").text() === songTitle) {
         if (audioPlayer.duration > 0 && !audioPlayer.paused) {
             $(".active .song-play-icon").text("play_circle_outline");
@@ -95,7 +95,7 @@ $(window).on('load', function() {
     // Apply album art if we have it
     $(".song").each(function() {
         if($(this).attr("data-album-art")) {
-            $(this).css("background-image", "url('http://evangipson.com/"+$(this).attr("data-album-art")+"')");
+            $(this).css("background-image", "url('https://evangipson.com/"+$(this).attr("data-album-art")+"')");
             $(this).css("background-size", "cover");
             // Highlight the text, too
             $(this).children("h2, p").css("background-color", "#202020");
@@ -120,7 +120,7 @@ $(window).on('load', function() {
         // Also scroll the songlist to the top.
         $("#songList").scrollTop(0);
         // Set the background to the album image
-        $(".large-bg").css("background-image", "url('http://evangipson.com/"+$(".song.visible").attr("data-album-art")+"')");
+        $(".large-bg").css("background-image", "url('https://evangipson.com/"+$(".song.visible").attr("data-album-art")+"')");
     });
     // Clicking on songs play songs.
     $(".song").on("click",function(e) {
