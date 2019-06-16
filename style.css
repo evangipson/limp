@@ -49,7 +49,7 @@ body, html {
     overflow-x: hidden;
 }
 /* Colors */
-#currentlyPlaying, nav li, .song {
+#currentlyPlaying, nav li, .song, h1 a {
     color: var(--text-color);
     text-shadow: 1px 2px var(--secondary-color-light);
     font-weight: bold;
